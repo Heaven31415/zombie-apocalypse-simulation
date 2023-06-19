@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ResourceRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ResourceRepository::class)]
 class Resource
@@ -14,10 +15,18 @@ class Resource
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Choice(['Ammo', 'Food'])]
     private ?string $type = null;
 
     #[ORM\Column]
+    #[Assert\GreaterThan(0)]
     private ?int $amount = null;
+
+    #[ORM\Column]
+    private ?int $x = null;
+
+    #[ORM\Column]
+    private ?int $y = null;
 
     public function getId(): ?int
     {
@@ -44,6 +53,30 @@ class Resource
     public function setAmount(int $amount): static
     {
         $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function getX(): ?int
+    {
+        return $this->x;
+    }
+
+    public function setX(int $x): static
+    {
+        $this->x = $x;
+
+        return $this;
+    }
+
+    public function getY(): ?int
+    {
+        return $this->y;
+    }
+
+    public function setY(int $y): static
+    {
+        $this->y = $y;
 
         return $this;
     }
