@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\HumanRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: HumanRepository::class)]
 class Human
@@ -14,6 +15,7 @@ class Human
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
     private ?string $name = null;
 
     #[ORM\Column]
@@ -23,9 +25,11 @@ class Human
     private ?int $y = null;
 
     #[ORM\Column]
+    #[Assert\GreaterThanOrEqual(0)]
     private ?int $ammoCount = null;
 
     #[ORM\Column]
+    #[Assert\GreaterThanOrEqual(0)]
     private ?int $foodCount = null;
 
     public function getId(): ?int
