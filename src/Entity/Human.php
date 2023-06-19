@@ -19,9 +19,11 @@ class Human
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Assert\Range(min: 1, max: 20)]
     private ?int $x = null;
 
     #[ORM\Column]
+    #[Assert\Range(min: 1, max: 20)]
     private ?int $y = null;
 
     #[ORM\Column]

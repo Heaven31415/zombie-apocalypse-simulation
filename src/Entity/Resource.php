@@ -23,9 +23,11 @@ class Resource
     private ?int $amount = null;
 
     #[ORM\Column]
+    #[Assert\Range(min: 1, max: 20)]
     private ?int $x = null;
 
     #[ORM\Column]
+    #[Assert\Range(min: 1, max: 20)]
     private ?int $y = null;
 
     public function getId(): ?int

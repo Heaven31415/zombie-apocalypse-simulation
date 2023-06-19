@@ -17,8 +17,8 @@ class ZombieController extends AbstractController
     {
         $zombie = new Zombie();
 
-        $zombie->setX(0)
-            ->setY(0);
+        $zombie->setX(1)
+            ->setY(1);
 
         $form = $this->createForm(ZombieType::class, $zombie);
 

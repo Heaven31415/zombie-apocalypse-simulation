@@ -17,8 +17,8 @@ class HumanController extends AbstractController
     {
         $human = new Human();
 
-        $human->setX(0)
-            ->setY(0)
+        $human->setX(1)
+            ->setY(1)
             ->setAmmoCount(0)
             ->setFoodCount(0);
 

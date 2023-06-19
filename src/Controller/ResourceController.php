@@ -17,8 +17,8 @@ class ResourceController extends AbstractController
     {
         $resource = new Resource();
 
-        $resource->setX(0)
-            ->setY(0)
+        $resource->setX(1)
+            ->setY(1)
             ->setAmount(1);
 
         $form = $this->createForm(ResourceType::class, $resource);
