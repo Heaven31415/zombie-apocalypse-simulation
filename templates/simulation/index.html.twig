@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Simulation{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('notice') %}
+        <div>
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <p>Write some information about simulation...</p>
+
+    <a href="{{ path('app_new_human') }}">Add a new human</a>
+{% endblock %}
