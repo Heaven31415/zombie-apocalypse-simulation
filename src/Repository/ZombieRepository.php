@@ -38,29 +38,4 @@ class ZombieRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-//    /**
-//     * @return Zombie[] Returns an array of Zombie objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('z')
-//            ->andWhere('z.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('z.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Zombie
-//    {
-//        return $this->createQueryBuilder('z')
-//            ->andWhere('z.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }
