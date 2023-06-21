@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\ZombieRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ZombieRepository::class)]
-class Zombie
+class Zombie extends Entity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -65,5 +66,39 @@ class Zombie
         $this->y = $y;
 
         return $this;
+    }
+
+    /**
+     * @param Human[]                $humans
+     * @param EntityManagerInterface $entityManager
+     *
+     * @return void
+     */
+    public function tryToInfect(array &$humans, EntityManagerInterface $entityManager): void
+    {
+        if (count($humans) === 0) {
+            $this->moveRandomly();
+
+            return;
+        }
+
+        usort($humans, function ($a, $b) {
+            $distanceA = Entity::distance($a, $this);
+            $distanceB = Entity::distance($b, $this);
+
+            return $distanceA <=> $distanceB;
+        });
+
+        $human = $humans[0]; // Nearest human
+
+        if ($this->isAtTheSamePositionAs($human)) {
+            $entityManager->persist($human->zombify());
+            $entityManager->remove($human);
+            array_shift($humans);
+        } else {
+            $this->moveTowards($human);
+        }
+
+        $entityManager->persist($this);
     }
 }

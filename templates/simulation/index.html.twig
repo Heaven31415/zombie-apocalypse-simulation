@@ -4,14 +4,65 @@
 
 {% block body %}
     {% for message in app.flashes('notice') %}
-        <div>
-            {{ message }}
-        </div>
+        <div>{{ message }}</div>
     {% endfor %}
 
-    <p>Write some information about simulation...</p>
-
     <a href="{{ path('app_new_human') }}">Add a new human</a>
+    <br>
     <a href="{{ path('app_new_zombie') }}">Add a new zombie</a>
+    <br>
+
     <a href="{{ path('app_new_resource') }}">Add a new resource</a>
+    <br>
+
+    <h1>Simulation</h1>
+    <table style="padding: 5px; border: 2px solid black">
+        <tr>
+            <th></th>
+            {% for x in range(1, 20) %}
+                {% if x < 10 %}
+                    <th>0{{ x }}</th>
+                {% else %}
+                    <th>{{ x }}</th>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {% for y in range(1, 20) %}
+            <tr>
+                {% if y < 10 %}
+                    <th>0{{ y }}</th>
+                {% else %}
+                    <th>{{ y }}</th>
+                {% endif %}
+                {% for x in range(1, 20) %}
+                    <th id="x{{ x }} y{{ y }}">.</th>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    <h2>Legend</h2>
+    <ul>
+        <li>H = Human</li>
+        <li>Z = Zombie</li>
+        <li>A = Ammo</li>
+        <li>F = Food</li>
+        <li>M = Mixed</li>
+        <li>. = Empty</li>
+    </ul>
+{% endblock %}
+
+{% block script %}
+    async function updateSimulationState() {
+        const response = await fetch('https://localhost:8000/simulation/state');
+        const state = await response.json();
+
+        for (let y = 1; y <= 20; y++) {
+            for (let x = 1; x <= 20; x++) {
+                const element = document.getElementById(`x${x} y${y}`);
+                element.innerText = state[y - 1][x - 1];
+            }
+        }
+    }
+
+    setInterval(updateSimulationState, 1000);
 {% endblock %}
