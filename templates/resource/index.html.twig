@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resources{% endblock %}
+
+{% block body %}
+    <h1>Resources</h1>
+    <ul>
+        {% for r in resources %}
+            <li>
+                {{ r.id }}. {{ r.type }}, X: {{ r.x }}, Y: {{ r.y }}, Amount: {{ r.amount }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('app_simulation') }}">Go back to simulation</a>
+{% endblock %}

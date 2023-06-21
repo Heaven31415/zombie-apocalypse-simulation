@@ -7,13 +7,16 @@
         <div>{{ message }}</div>
     {% endfor %}
 
-    <a href="{{ path('app_new_human') }}">Add a new human</a>
+    <a href="{{ path('app_new_human') }}">Add a new human</a> |
+    <a href="{{ path('app_index_human') }}">See all humans</a>
     <br>
 
-    <a href="{{ path('app_new_zombie') }}">Add a new zombie</a>
+    <a href="{{ path('app_new_zombie') }}">Add a new zombie</a> |
+    <a href="{{ path('app_index_zombie') }}">See all zombies</a>
     <br>
 
-    <a href="{{ path('app_new_resource') }}">Add a new resource</a>
+    <a href="{{ path('app_new_resource') }}">Add a new resource</a> |
+    <a href="{{ path('app_index_resource') }}">See all resources</a>
     <br>
 
     <h1>Simulation</h1>
@@ -48,7 +51,6 @@
         <li>A = Ammo</li>
         <li>F = Food</li>
         <li>M = Mixed</li>
-        <li>. = Empty</li>
     </ul>
 {% endblock %}
 

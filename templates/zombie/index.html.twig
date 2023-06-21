@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Zombies{% endblock %}
+
+{% block body %}
+    <h1>Zombies</h1>
+    <ul>
+        {% for z in zombies %}
+            <li>
+                {{ z.id }}. {{ z.name }}, X: {{ z.x }}, Y: {{ z.y }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('app_simulation') }}">Go back to simulation</a>
+{% endblock %}

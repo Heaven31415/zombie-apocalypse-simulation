@@ -12,8 +12,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ResourceController extends AbstractController
 {
+    public function __construct(private readonly ResourceRepository $resourceRepository)
+    {
+    }
+
+    #[Route('/resource/all', name: 'app_index_resource')]
+    public function index(): Response
+    {
+        $resources = $this->resourceRepository->findBy([], ['id' => 'ASC']);
+
+        return $this->render('resource/index.html.twig', ['resources' => $resources]);
+    }
+
     #[Route('/resource/new', name: 'app_new_resource')]
-    public function new(Request $request, ResourceRepository $resourceRepository): Response
+    public function new(Request $request): Response
     {
         $resource = new Resource();
 
@@ -28,7 +40,7 @@ class ResourceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $resource = $form->getData();
 
-            $resourceRepository->save($resource, true);
+            $this->resourceRepository->save($resource, true);
 
             $this->addFlash('notice', 'A new resource has been successfully created!');
 

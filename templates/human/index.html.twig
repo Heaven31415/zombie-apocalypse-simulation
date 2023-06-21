@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Humans{% endblock %}
+
+{% block body %}
+    <h1>Humans</h1>
+    <ul>
+        {% for h in humans %}
+            <li>
+                {{ h.id }}. {{ h.name }}, X: {{ h.x }}, Y: {{ h.y }}, Ammo: {{ h.ammoCount }}, Food: {{ h.foodCount }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('app_simulation') }}">Go back to simulation</a>
+{% endblock %}

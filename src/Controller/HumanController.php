@@ -12,8 +12,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HumanController extends AbstractController
 {
+    public function __construct(private readonly HumanRepository $humanRepository)
+    {
+    }
+
+    #[Route('/human/all', name: 'app_index_human')]
+    public function index(): Response
+    {
+        $humans = $this->humanRepository->findBy([], ['id' => 'ASC']);
+
+        return $this->render('human/index.html.twig', ['humans' => $humans]);
+    }
+
     #[Route('/human/new', name: 'app_new_human')]
-    public function new(Request $request, HumanRepository $humanRepository): Response
+    public function new(Request $request): Response
     {
         $human = new Human();
 
@@ -29,7 +41,7 @@ class HumanController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $human = $form->getData();
 
-            $humanRepository->save($human, true);
+            $this->humanRepository->save($human, true);
 
             $this->addFlash('notice', 'A new human has been successfully created!');
 

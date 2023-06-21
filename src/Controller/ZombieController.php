@@ -12,8 +12,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ZombieController extends AbstractController
 {
+    public function __construct(private readonly ZombieRepository $zombieRepository)
+    {
+    }
+
+    #[Route('/zombie/all', name: 'app_index_zombie')]
+    public function index(): Response
+    {
+        $zombies = $this->zombieRepository->findBy([], ['id' => 'ASC']);
+
+        return $this->render('zombie/index.html.twig', ['zombies' => $zombies]);
+    }
     #[Route('/zombie/new', name: 'app_new_zombie')]
-    public function new(Request $request, ZombieRepository $zombieRepository): Response
+    public function new(Request $request): Response
     {
         $zombie = new Zombie();
 
@@ -27,7 +38,7 @@ class ZombieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $zombie = $form->getData();
 
-            $zombieRepository->save($zombie, true);
+            $this->zombieRepository->save($zombie, true);
 
             $this->addFlash('notice', 'A new zombie has been successfully created!');
 
