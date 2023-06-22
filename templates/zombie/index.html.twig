@@ -1,16 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Zombies{% endblock %}
+{% block title %}Zombies ({{ zombies|length }}){% endblock %}
 
 {% block body %}
-    <h1>Zombies</h1>
-    <ul>
-        {% for z in zombies %}
-            <li>
-                {{ z.id }}. {{ z.name }}, X: {{ z.x }}, Y: {{ z.y }}
-            </li>
-        {% endfor %}
-    </ul>
+    <h1>Zombies ({{ zombies|length }})</h1>
+    {% if zombies %}
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>X</th>
+                <th>Y</th>
+            </tr>
+            {% for zombie in zombies %}
+                <tr>
+                    <td>{{ zombie.id }}</td>
+                    <td>{{ zombie.name }}</td>
+                    <td>{{ zombie.x }}</td>
+                    <td>{{ zombie.y }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Currently there are no zombies in the simulation.</p>
+    {% endif %}
 
-    <a href="{{ path('app_simulation') }}">Go back to simulation</a>
+    <a href="{{ path('app_simulation') }}">Go back</a>
 {% endblock %}

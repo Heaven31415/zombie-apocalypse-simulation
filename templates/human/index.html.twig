@@ -1,16 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Humans{% endblock %}
+{% block title %}Humans ({{ humans|length }}){% endblock %}
 
 {% block body %}
-    <h1>Humans</h1>
-    <ul>
-        {% for h in humans %}
-            <li>
-                {{ h.id }}. {{ h.name }}, X: {{ h.x }}, Y: {{ h.y }}, Ammo: {{ h.ammoCount }}, Food: {{ h.foodCount }}
-            </li>
-        {% endfor %}
-    </ul>
+    <h1>Humans ({{ humans|length }})</h1>
+    {% if humans %}
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>Ammo count</th>
+                <th>Food count</th>
+            </tr>
+            {% for human in humans %}
+                <tr>
+                    <td>{{ human.id }}</td>
+                    <td>{{ human.name }}</td>
+                    <td>{{ human.x }}</td>
+                    <td>{{ human.y }}</td>
+                    <td>{{ human.ammoCount }}</td>
+                    <td>{{ human.foodCount }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Currently there are no humans in the simulation.</p>
+    {% endif %}
 
-    <a href="{{ path('app_simulation') }}">Go back to simulation</a>
+    <a href="{{ path('app_simulation') }}">Go back</a>
 {% endblock %}

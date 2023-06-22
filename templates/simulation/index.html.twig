@@ -7,51 +7,57 @@
         <div>{{ message }}</div>
     {% endfor %}
 
-    <a href="{{ path('app_new_human') }}">Add a new human</a> |
-    <a href="{{ path('app_index_human') }}">See all humans</a>
-    <br>
+    <div>
+        <h1>Menu</h1>
+        <div>
+            <a href="{{ path('app_new_human') }}">Add human</a>
+            <a href="{{ path('app_index_human') }}">(See all)</a>
+        </div>
+        <div>
+            <a href="{{ path('app_new_zombie') }}">Spawn zombie</a>
+            <a href="{{ path('app_index_zombie') }}">(See all)</a>
+        </div>
+        <div>
+            <a href="{{ path('app_new_resource') }}">Allocate resource</a>
+            <a href="{{ path('app_index_resource') }}">(See all)</a>
+        </div>
+    </div>
 
-    <a href="{{ path('app_new_zombie') }}">Add a new zombie</a> |
-    <a href="{{ path('app_index_zombie') }}">See all zombies</a>
-    <br>
-
-    <a href="{{ path('app_new_resource') }}">Add a new resource</a> |
-    <a href="{{ path('app_index_resource') }}">See all resources</a>
-    <br>
-
-    <h1>Simulation</h1>
-    <table style="padding: 5px; border: 2px solid black">
-        <tr>
-            <th></th>
-            {% for x in range(1, 20) %}
-                {% if x < 10 %}
-                    <th>0{{ x }}</th>
-                {% else %}
-                    <th>{{ x }}</th>
-                {% endif %}
-            {% endfor %}
-        </tr>
-        {% for y in range(1, 20) %}
+    <div>
+        <h1>Simulation</h1>
+        <table style="padding: 5px; border: 1px solid black">
             <tr>
-                {% if y < 10 %}
-                    <th>0{{ y }}</th>
-                {% else %}
-                    <th>{{ y }}</th>
-                {% endif %}
+                <th></th>
                 {% for x in range(1, 20) %}
-                    <th id="x{{ x }} y{{ y }}">.</th>
+                    {% if x < 10 %}
+                        <th>0{{ x }}</th>
+                    {% else %}
+                        <th>{{ x }}</th>
+                    {% endif %}
                 {% endfor %}
             </tr>
-        {% endfor %}
-    </table>
-    <h2>Legend</h2>
-    <ul>
-        <li>H = Human</li>
-        <li>Z = Zombie</li>
-        <li>A = Ammo</li>
-        <li>F = Food</li>
-        <li>M = Mixed</li>
-    </ul>
+            {% for y in range(1, 20) %}
+                <tr>
+                    {% if y < 10 %}
+                        <th>0{{ y }}</th>
+                    {% else %}
+                        <th>{{ y }}</th>
+                    {% endif %}
+                    {% for x in range(1, 20) %}
+                        <th id="x{{ x }} y{{ y }}">.</th>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+        <h2>Legend</h2>
+        <ul>
+            <li>A = Ammo (Resource)</li>
+            <li>F = Food (Resource)</li>
+            <li>H = Human</li>
+            <li>Z = Zombie</li>
+            <li>M = Mixed (More than 1 entity at the same position)</li>
+        </ul>
+    </div>
 {% endblock %}
 
 {% block script %}

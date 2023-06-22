@@ -1,16 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Resources{% endblock %}
+{% block title %}Resources ({{ resources|length }}){% endblock %}
 
 {% block body %}
-    <h1>Resources</h1>
-    <ul>
-        {% for r in resources %}
-            <li>
-                {{ r.id }}. {{ r.type }}, X: {{ r.x }}, Y: {{ r.y }}, Amount: {{ r.amount }}
-            </li>
-        {% endfor %}
-    </ul>
+    <h1>Resources ({{ resources|length }})</h1>
+    {% if resources %}
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>Amount</th>
+            </tr>
+            {% for resource in resources %}
+                <tr>
+                    <td>{{ resource.id }}</td>
+                    <td>{{ resource.type }}</td>
+                    <td>{{ resource.x }}</td>
+                    <td>{{ resource.y }}</td>
+                    <td>{{ resource.amount }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Currently there are no resources in the simulation.</p>
+    {% endif %}
 
-    <a href="{{ path('app_simulation') }}">Go back to simulation</a>
+    <a href="{{ path('app_simulation') }}">Go back</a>
 {% endblock %}
