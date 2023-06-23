@@ -40,4 +40,5 @@ HTTP protocol, unfortunately HTTPS is not supported out of the box)
 
 ## How to interact with the simulation?
 
-TODO: Write more about this!
+Below the menu you will find 6 links to add different kind
+of entities to the simulation or to see their current state
