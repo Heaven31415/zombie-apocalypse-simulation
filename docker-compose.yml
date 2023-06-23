@@ -19,7 +19,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    command: bin/update
+    command: bin/update.sh
   db:
     container_name: tre-db
     image: postgres:15.3-alpine3.18
