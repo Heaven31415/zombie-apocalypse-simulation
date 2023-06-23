@@ -16,7 +16,6 @@ final class Version20230619101419 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SEQUENCE human_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql(
             'CREATE TABLE human (id INT NOT NULL, name VARCHAR(255) NOT NULL, x INT NOT NULL, y INT NOT NULL, ammo_count INT NOT NULL, food_count INT NOT NULL, PRIMARY KEY(id))'
