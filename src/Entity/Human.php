@@ -172,7 +172,7 @@ class Human extends Entity
             $distanceToZombie = Entity::distance($this, $zombie);
             $distanceToResource = Entity::distance($this, $resource);
 
-            if ($distanceToZombie < 3.0 && $this->getAmmoCount() !== 0) {
+            if ($distanceToZombie < 5.0 && $this->getAmmoCount() !== 0) {
                 $this->shootZombie($zombie, $zombies, $entityManager);
             } elseif ($this->isAtTheSamePositionAs($resource)) {
                 $this->pickUpResource($resource, $resources, $entityManager);
