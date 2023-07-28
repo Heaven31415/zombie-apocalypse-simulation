@@ -1,7 +1,7 @@
 version: '3.6'
 services:
   web:
-    container_name: tre-web
+    container_name: zas-web
     build: .
     environment:
       DATABASE_URL: "postgresql://user:password@db:5432/db?serverVersion=15&charset=utf8"
@@ -12,7 +12,7 @@ services:
         condition: service_healthy
     command: bash -c "php bin/console doctrine:migrations:migrate --no-interaction && symfony serve --no-tls"
   cron:
-    container_name: tre-cron
+    container_name: zas-cron
     build: .
     environment:
       DATABASE_URL: "postgresql://user:password@db:5432/db?serverVersion=15&charset=utf8"
@@ -21,7 +21,7 @@ services:
         condition: service_healthy
     command: bin/update.sh
   db:
-    container_name: tre-db
+    container_name: zas-db
     image: postgres:15.3-alpine3.18
     environment:
       POSTGRES_USER: user
